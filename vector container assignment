@@ -1,0 +1,103 @@
+/*Write C++ program using STL for sorting and searching with user defined records such as 
+person record(Name,Roll number) using vector container*/
+// Online C++ compiler to run C++ program online
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+class student
+{
+    public:
+    int rno;
+    char name[30];
+    bool operator==(const student &i1)
+    {
+        if(rno==i1.rno)
+            return 1;
+        else 
+            return 0;
+    }
+    bool operator<(const student &i1)
+    {
+        if(rno<i1.rno)
+            return 1;
+        else 
+            return 0;
+    }
+};
+bool compare(const student &i1,const student &i2)
+{
+    return i1.rno<i2.rno;
+}
+vector<student>o1;
+void insert();
+void display();
+void print(student &i1);
+void search();
+void sort();
+
+int main() {
+    int ch,n;
+    do{
+        cout<<"\nMENU \n1.insert\n2.display\n3.search\n4.sort\n5.exit";
+        cout<<"\nEnter the choice =";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1:
+                insert();
+                break;
+            case 2:
+                display();
+                break;
+            case 3:
+                search();
+                break;
+            case 4:
+                sort(o1.begin(),o1.end(),compare);
+                display();
+                break;
+            default:
+                cout<<"\nWrong choice";
+        }
+    }while(ch<5);
+    return 0;
+}
+void insert()
+{
+    student i1;
+    int n;
+    cout<<"\nEnter the no which student want data= ";
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        cout<<"\nEnter the name =";
+        cin>>i1.name;
+        cout<<"\nEnter the Roll number = ";
+        cin>>i1.rno;
+        o1.push_back(i1);
+    }
+}
+void display()
+{
+    for_each(o1.begin(),o1.end(),print);
+}
+void print(student &i1)
+{
+    cout<<"\n\t";
+    cout<<"\nNAME = "<<i1.name;
+    cout<<"\nRoll Number = "<<i1.rno;
+}
+void search()
+{
+    student i1;
+    vector<student>::iterator p;
+    cout<<"\nEnter the Roll number want to search = ";
+    cin>>i1.rno;
+        p=find(o1.begin(),o1.end(),i1);
+    if(p==o1.end())
+        cout<<"\nNOT FOUND ";
+    else
+        cout<<"\nFOUND ";
+    
+}
