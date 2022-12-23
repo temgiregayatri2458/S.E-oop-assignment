@@ -1,0 +1,115 @@
+/*Develop an object oriented program in C++ to create a database of student information 
+system containing the following information: Name, Roll number, Class, division, Date of 
+Birth, Blood group, Contact address, telephone number, driving license no. and other.
+Construct the database with suitable member functions for initializing and destroying the 
+data viz constructor, default constructor, Copy constructor, destructor, static member 
+functions, friend class, this pointer, inline code and dynamic memory allocation 
+operators-new and delete.
+*/
+include<iostream>
+#include<string.h>    // header file declares a set of functions to work strings.
+using namespace std;
+    
+     class db
+    {
+      int roll;
+      char name[20];
+      char Class[10];
+      char Div[10];
+      char dob[12];
+      char bg[5],city[10];
+      char phone[12],license[12];
+
+   public:
+        static int stdno;      // declaration of static variable
+        static void count()    // defination of static function
+     {
+        cout<<"\n No.of objects created: "<<stdno;
+     }
+     void fin(){cout<<"\nInline Function!";}
+
+         db()        // default constructor
+    {
+      roll=7;
+      strcpy(name,"Sachin");
+      strcpy(Class,"SE");
+      strcpy(Div,"A");
+      strcpy(dob,"13/08/1992");
+      strcpy(bg,"B+");
+      strcpy(city,"Pune");
+      strcpy(phone,"9123456789");
+      strcpy(license,"A1010");
+      ++stdno;
+    }
+        void getdata()// defining member function
+        {
+            cout<<"Enter name: "<<endl;
+            cin>>name;
+            cout<<"rollno: "<<endl;
+            cin>>roll;
+            cout<<"Class: "<<endl;
+            cin>>Class;
+            cout<<"Div: "<<endl;
+            cin>>Div;
+            cout<<"DOB: "<<endl;
+            cin>>dob;
+            cout<<"bg: "<<endl;
+            cin>>bg;
+            cout<<"City: "<<endl;
+            cin>>city;
+            cout<<"Phone: "<<endl;
+            cin>>phone;
+            cout<<"license: "<<endl;
+            cin>>license;
+          /cin>>name>>roll>>Class>>Div>>dob>>bg>>city>>phone>>license;/
+        }
+            friend void display(db d);   // declaration of friend function
+
+            ~db()   // destructor
+        {
+            cout<<"\n\n"<<this->name<<"(Object) is destroyed!\n";  
+        }
+};
+
+        void display(db d) // defination of friend function
+       {
+        cout<<"\n Name:"<<d.name;
+        cout<<"\n Roll_No:"<<d.roll;
+        cout<<"\n Class:"<<d.Class;
+        cout<<"\n Div:"<<d.Div;
+        cout<<"\n DOB:"<<d.dob;
+        cout<<"\n Blood group:"<<d.bg;
+        cout<<"\n City:"<<d.city;
+        cout<<"\n Phone_No:"<<d.phone;
+        cout<<" \n License_No:"<<d.license; 
+      }
+int db::stdno; // Define static data member stdno outside the class;
+
+        int main()
+      { 
+        int n,i;
+        db d1,*ptr[5];  
+        cout<<"\nDefault values:";
+        display(d1);
+
+            d1.getdata();
+            display(d1);
+
+            cout<<"\nHow many objects u want to create?:";
+            cin>>n;
+            for(i=0;i<n;i++)
+           {                   
+              ptr[i]=new db(); //new operator use to dynamic memory(run time) allocation
+              ptr[i]->getdata(); 
+           }
+               cout<<"\n"<<"name"<<"roll"<<"Class"<<"Div"<<"dob"<<"bg"<<"contact"<<"phone"<<"license";
+                for(i=0;i<n;i++)
+                display(*ptr[i]);
+                db::count();  // calling of static function
+
+            for(i=0;i<n;i++)
+            {
+                delete(ptr[i]); //delete operator use to deallocation of memory
+            }
+            cout<<"\nObjects deleted!" ;
+      }
