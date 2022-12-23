@@ -1,0 +1,111 @@
+/*Imagine a publishing company which does marketing for book and audio cassette 
+versions. Create a class publication that stores the title (a string) and price (type float) of 
+a publication. 
+From this class derive two classes: book, which adds a page count (type int), and tape, 
+which adds a playing time in minutes (type float).
+Write a program that instantiates the book and tape classes, allows user to enter data 
+and displays the data members. If an exception is caught, replace all the data member 
+values with zero values.*/
+
+
+
+#include <iostream>
+using namespace std;
+class Publication
+{
+    protected:
+        string title;
+        float price;
+    public:
+        virtual void get()
+        {
+            
+        }
+        virtual void display()
+        {
+            
+        }
+};
+
+class Book : public Publication
+{
+    int pcnt;
+    public:
+        void get()
+        {
+            cout<<"\nEnter Name of the Book : ";
+            cin>>title;
+            cout<<"\nEnter Price of the Book : ";
+            cin>>price;
+            cout<<"\nEnter Pagecount of the Book : ";
+            cin>>pcnt;
+        }
+        
+        void display()
+        {
+            try
+            {
+                if(pcnt==0 || price==0)
+                {
+                    throw pcnt;
+                }
+                else
+                {
+                    cout<<"\nBOOK DATA ";
+                    cout<<"\nTitle : "<<title<<"\nPrice : "<<price<<"\nPagecount : "<<pcnt;
+                }
+            }
+            catch(...)
+            {
+                cout<<"\nException caught : Price or Pagecount never should be zero.";
+                cout<<"\nTitle = 0"<<"\nPrice = 0"<<"\nPagecount = 0";
+            }
+        }
+};
+
+class Tape : public Publication
+{
+    float pt;
+    public:
+        void get()
+        {
+            cout<<"\nEnter Name of the Tape : ";
+            cin>>title;
+            cout<<"\nEnter Price of the Tape : ";
+            cin>>price;
+            cout<<"\nEnter Playing Time of the Tape : ";
+            cin>>pt;
+        }
+        
+        void display()
+        {
+            try
+            {
+                if(pt==0 || price==0)
+                {
+                    throw pt;
+                }
+                else
+                {
+                    cout<<"\nTAPE DATA ";
+                    cout<<"\nTitle : "<<title<<"\nPrice : "<<price<<"\nPlaying Time : "<<pt;
+                }
+            }
+            catch(...)
+            {
+                cout<<"\nException caught : Price or Playing time never should be zero.";
+                cout<<"\nTitle = 0"<<"\nPrice = 0"<<"\nPlaying Time= 0";
+            }
+        }
+};
+
+int main()
+{
+    Tape T;
+    Book B;
+    B.get();
+    T.get();
+    B.display();
+    T.display();
+    return 0;
+}
