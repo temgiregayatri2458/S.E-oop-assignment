@@ -1,0 +1,44 @@
+''' Write a program in C++ to use map associative container. The keys will be the names of 
+states, and the values will be the populations of the states. When the program runs, the 
+user is prompted to type the name of a state. The program then looks in the map, using 
+the state name as an index, and returns the population of the state.'''
+
+
+
+
+#include<iostream>
+#include<map>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	map<string,int>mp;
+	map<string,int>::iterator it;
+	int no,n,i;
+	string name,state;
+	cout<<"\nEnter the number = ";
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cout<<"\nEnter the name of the state = ";
+		cin>>name;
+		cout<<"\nEnter the population = ";
+		cin>>no;
+		mp.insert(pair<string,int>(name,no));
+	}
+	cout<<"\nSize of the map is = "<<mp.size();
+	
+	for(it=mp.begin();it!=mp.end();it++)
+	{
+		cout<<it->first<<":"<<it->second;
+	}
+	cout<<"\nEnter the name of the state which data want to search = ";
+	cin>>state;
+	it=mp.find(state);
+	if(it!=mp.end())
+		cout<<"\nData present ";
+	else
+		cout<<"\nData not present ";
+	return 0;
+	
+}
